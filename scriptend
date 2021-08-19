@@ -4,7 +4,6 @@ stri=$(($str + 1))
 #echo $stri
 for((i=1;i<$stri;i++))
 do
-#echo $i
 #выводит строку из файла с юзерами
 FULLNAME=`sed "${i}q;d" fileusers.txt | awk -F";" '{print $1}'`
 echo $FULLNAME
