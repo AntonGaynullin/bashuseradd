@@ -1,0 +1,2 @@
+"Anton Gainullin";Gainullin.A;/users/Gainullin.A1;.tti2Y5oZDFUA;adm,cdrom;
+"Vasya Pupkin";Pupkin.V;/users/pup1;.tti2Y5oZDFUA;cdrom;

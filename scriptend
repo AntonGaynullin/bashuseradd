@@ -1,0 +1,33 @@
+#!/bin/bash
+str=$(wc -l fileusers.txt | awk '{print $1}')
+stri=$(($str + 1))
+#echo $stri
+for((i=1;i<$stri;i++))
+do
+#echo $i
+#выводит строку из файла с юзерами
+FULLNAME=`sed "${i}q;d" fileusers.txt | awk -F";" '{print $1}'`
+echo $FULLNAME
+NICK=`sed "${i}q;d" fileusers.txt | awk -F";" '{print $2}'`
+echo $NICK
+DIR=`sed "${i}q;d" fileusers.txt | awk -F";" '{print $3}'`
+echo $DIR
+HASH=`sed "${i}q;d" fileusers.txt | awk -F";" '{print $4}'`
+echo $HASH
+GROUP=`sed "${i}q;d" fileusers.txt | awk -F";" '{print $5}'`
+echo $GROUP
+#создаём домашнюю дирректорию для пользователя по вводным данным 
+sudo mkdir -p $DIR
+#Копируем файлы и директории, которые по умолчанию создаются в#
+# домашней директории пользователя в данной системе#
+sudo cp -rT /etc/skel $DIR
+#Создаем пользователя и указываем домашнюю директорию:
+#sudo useradd -d /users/pupkin pupkin#
+#задать группы опция -G список,групп#
+sudo useradd -p "$HASH"  -d "$DIR"  -G "$GROUP"  -c "$FULLNAME" "$NICK"
+#sudo useradd -p .tti2Y5oZDFUA -d /users/USERFOLDER -G adm,cdrom -c"FullUserName"  USERNAME
+
+#Меняем права доступа у домашней директории#
+#sudo chown -R $NICK:$NICK $DIR
+
+done
